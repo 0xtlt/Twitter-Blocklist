@@ -1,0 +1,23 @@
+{
+  "name": "twitter-blocklist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "studio": "prisma studio"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xtlt/Twitter-Blocklist.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0xtlt/Twitter-Blocklist/issues"
+  },
+  "homepage": "https://github.com/0xtlt/Twitter-Blocklist#readme",
+  "devDependencies": {
+    "prisma": "^4.3.0-dev.72"
+  }
+}

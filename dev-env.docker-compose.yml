@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  mysql-db:
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+      - MYSQL_DATABASE=bd
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./app-data/mysql-data:/var/lib/mysql
+  # Redis database for future use
+  # redis:
+  #   image: redis:latest
+  #   restart: always
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - ./app-data/redis-data:/data

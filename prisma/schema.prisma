@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "cargo prisma"
+  output   = "./src/prisma.rs"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                       String @id @default(cuid())
+  sessionToken             String
+  twitterAccessToken       String @unique
+  twitterAccessTokenSecret String @unique
+
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  BlockList BlockList[]
+}
+
+model BlockList {
+  id String @id @default(cuid())
+
+  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  ownerId String @unique
+
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  BlockListItem BlockListItem[]
+}
+
+model BlockListItem {
+  id String @id @default(cuid())
+
+  blockList   BlockList @relation(fields: [blockListId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  blockListId String
+
+  twitterAt String
+  twitterId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
