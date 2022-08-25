@@ -17,9 +17,10 @@ model User {
   twitterAccessToken       String @unique
   twitterAccessTokenSecret String @unique
 
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  BlockList BlockList[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  BlockList     BlockList[]
+  IncomingBlock IncomingBlock[]
 }
 
 model BlockList {
@@ -41,6 +42,20 @@ model BlockListItem {
 
   twitterAt String
   twitterId String
+
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  IncomingBlock IncomingBlock[]
+}
+
+model IncomingBlock {
+  id String @id @default(cuid())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String
+
+  blockListItem   BlockListItem @relation(fields: [blockListItemId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  blockListItemId String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
